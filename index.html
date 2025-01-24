@@ -1,45 +1,67 @@
 <!doctype html>
 <html lang="en">
-
-<head>
-    <link rel="icon" type="image/svg+xml"
-        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22256%22 height=%22256%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2250%22 fill=%22%230058ff%22></rect><path fill=%22%23fff%22 d=%22M72.15 21.33L72.15 21.33Q74.49 22.50 74.90 25.02Q75.30 27.54 73.59 29.61L73.59 29.61Q72.42 31.23 70.58 31.41Q68.73 31.59 66.84 30.69L66.84 30.69Q64.68 29.70 62.30 29.16Q59.91 28.62 57.30 28.62L57.30 28.62Q52.44 28.62 48.62 30.15Q44.79 31.68 42.09 34.52Q39.39 37.35 38.00 41.22Q36.60 45.09 36.60 49.77L36.60 49.77Q36.60 55.26 38.18 59.31Q39.75 63.36 42.54 66.06Q45.33 68.76 49.11 70.07Q52.89 71.37 57.30 71.37L57.30 71.37Q59.73 71.37 62.16 70.92Q64.59 70.47 66.84 69.30L66.84 69.30Q68.73 68.40 70.58 68.67Q72.42 68.94 73.68 70.56L73.68 70.56Q75.48 72.81 74.99 75.20Q74.49 77.58 72.24 78.66L72.24 78.66Q69.90 79.83 67.43 80.60Q64.95 81.36 62.43 81.77Q59.91 82.17 57.30 82.17L57.30 82.17Q50.82 82.17 45.02 80.10Q39.21 78.03 34.67 73.98Q30.12 69.93 27.51 63.86Q24.90 57.78 24.90 49.77L24.90 49.77Q24.90 42.84 27.29 36.99Q29.67 31.14 34.04 26.87Q38.40 22.59 44.34 20.21Q50.28 17.82 57.30 17.82L57.30 17.82Q61.26 17.82 65.04 18.72Q68.82 19.62 72.15 21.33Z%22></path></svg>" />
-    <meta charset="UTF-8">
-    <meta http-equiv=“Pragma” content=”no-cache”>
-    <meta http-equiv=“Expires” content=”-1″>
-    <meta http-equiv=“CACHE-CONTROL” content=”NO-CACHE”>
-    <!-- CSS Stylesheets -->
-    <link rel="stylesheet" href="css/master.css">
-
-    <title>EuroWeather API Project</title>
-</head>
-
-<body>
-    <section>
-        <header>
-            <nav>
-                <h1>Weather API Project</h1>
-            </nav>
-        </header>
-    </section>    
-    <section class="">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Weather API</h5>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv=“Pragma” content=”no-cache”>
+        <meta http-equiv=“Expires” content=”-1″>
+        <meta http-equiv=“CACHE-CONTROL” content=”NO-CACHE”>
+        <link rel="icon" type="image/svg+xml"
+            href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22256%22 height=%22256%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%232a49da%22></rect><path d=%22M76.33 50.09L76.33 50.09Q76.33 57.11 74.34 62.47Q72.37 67.82 68.86 71.38Q65.34 74.93 60.58 76.78Q55.81 78.62 50.23 78.62L50.23 78.62Q40.33 78.62 33.40 72.95L33.40 72.95L27.91 78.89Q25.57 78.44 24.62 77.31Q23.68 76.19 23.68 75.20L23.68 75.20Q23.68 74.03 24.26 73.17Q24.85 72.32 26.02 71.15L26.02 71.15L28.99 68.09Q26.65 64.67 25.39 60.13Q24.13 55.58 24.13 50.09L24.13 50.09Q24.13 43.07 26.15 37.76Q28.18 32.45 31.69 28.85Q35.20 25.25 39.97 23.41Q44.73 21.56 50.23 21.56L50.23 21.56Q54.81 21.56 58.91 22.91Q63.00 24.26 66.34 26.87L66.34 26.87L71.56 21.11Q73.36 21.56 74.57 22.46Q75.78 23.36 75.78 24.62L75.78 24.62Q75.78 25.43 75.29 26.33Q74.80 27.23 73.53 28.76L73.53 28.76L70.92 31.64Q73.45 35.15 74.89 39.79Q76.33 44.42 76.33 50.09ZM68.95 50.09L68.95 50.09Q68.95 46.13 68.18 42.85Q67.42 39.56 65.98 36.95L65.98 36.95L38.08 67.91Q40.42 70.07 43.48 71.24Q46.54 72.41 50.23 72.41L50.23 72.41Q58.78 72.41 63.86 66.65Q68.95 60.89 68.95 50.09ZM31.60 50.09L31.60 50.09Q31.60 57.47 34.21 62.69L34.21 62.69L61.84 31.82Q57.06 27.77 50.23 27.77L50.23 27.77Q46.00 27.77 42.58 29.26Q39.16 30.74 36.73 33.58Q34.30 36.41 32.95 40.55Q31.60 44.69 31.60 50.09Z%22 fill=%22%23ffff00%22></path></svg>">
+        <!-- CSS Stylesheets -->
+        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css"
+            rel="stylesheet">
+        <!-- Font Awesome -->
+        <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+        <link rel="stylesheet" href="css/master.css">
+        <!-- Google Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400..700;1,400..700&display=swap"
+            rel="stylesheet">
+        <title>European Weather API Project</title>
+    </head>
+    <body>
+        <img class="hero" src="images/europe-map.jpg" alt="banner">
+        <h1 class="sub-heading">European Weather API Project</h1>
+        <h2 class="sub-heading">European Weather Station</h2>
+        <p>
+            <code class="copyright-text">"Powered by "<a href="http://www.7timer.info/doc.php?lang=en" target="_blank" data-toggle="tooltip" data-placement="Top" title=""
+                onclick="javascript:toolTipReset()" data-original-title="Tap to visit 7Timer!"><span
+                    class="keyword-magnet">7Timer!</span></a></code>
+        </p>
+        <div class="section-description">
+            <p class="section-subheading"></p>
+            <form id="query-form"  data-np-intersection-state="visible">
+                <select name="citySelected" id="citySelected" data-toggle="tooltip" onclick="javascript:toolTipReset()" data-placement="bottom" title data-original-title="Drop down and select a city to see the forecast" data-np-intersection-state="observed"></select>
+            </form>
+            <p></p>
+            <div class="section-subheading" id="get-results-heading"</div>
+            <div class="results-div" id="results"></div>
         </div>
-    </section>
-</body>
-
-<footer>
-    <p class="copyright-text">© Copyright 2023 _______ </p>
-</footer>
-
-<!-- Our codes -->
-<script src="js/main.js"></script>
+        <div>
+            <footer>
+                <div class="site-footer text-center xsize">
+                    <div>© Copyright <span id="#spanYear"></span> | European Weather Station</div>
+                </div>         
+                <!--Get current year for copyright statement-->
+                <script>
+                    <!-- $('#spanYear').html(new Date().getFullYear()); -->
+                    const d = new Date();
+                    document.getElementById("#spanYear").innerHTML = d.getFullYear();
+                </script>
+            </footer>
+            <!-- JQuery Scripts -->
+                <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+                    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+            <!-- Bootstrap Scripts -->
+                <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+                    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+                    crossorigin="anonymous"></script>
+                <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+                    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+                    crossorigin="anonymous"></script>
+            <!-- Our codes -->
+            <script src="js/main.js"></script>
+        </div>
+    </body>

@@ -2,6 +2,11 @@ body {
     background-color: #d7d7d7;
     color: black;
 }
+
+.header-bg {
+    image-resolution: 1311px x 239px  ;
+}
+
 h1 {
     text-align: center;
 }

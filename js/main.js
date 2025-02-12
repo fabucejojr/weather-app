@@ -1,66 +1,76 @@
-const csvFilePath = 'city_coordinates.csv'; // Replace with your actual .csv file path
+const csvFilePath = fetch('/city_coordinates.csv'); // Ensure the file is correctly placed
 
-// Base URL for 7timer API
-const apiEndpoint = 'http://www.7timer.info/bin/astro.php?lon=113.17&lat=23.09&ac=0&lang=en&unit=metric&output=internal&tzshift=0';
-
-// Function to fetch and parse CSV file
 async function loadCity_Coordinates() {
-    const response = await fetch(csvFilePath);
-    const csvText = await response.text();
-    const rows = csvText.split('\n').slice(1); // Skip header row
-    const city_coordinates = rows.map(row => {
-        const [lat, lon, city, country] = row.split(',');
-        return { lat: parseFloat(lat), lon: parseFloat(lon), city, country };
-    });
-    return city_coordinates;
-}
+    try {
+        //const response = await fetch(csvFilePath);
+        const response = await fetch('city_coordinates.csv');
+        if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
 
-// Populate dropdown with city_coordinates
+        const csvText = await response.text();
+        console.log("CSV Content:", csvText);
+
+        const rows = csvText.trim().split('\n').slice(1); // Skip header row
+        console.log("Raw CSV Rows:");
+
+        const city_coordinates = rows.map(row => {
+            const columns = row.split(',').map(col => col.trim()); // Trim extra spaces
+
+            // Ensure all 4 columns exist before proceeding
+            if (columns.length < 4 || !columns[0] || !columns[1] || !columns[2] || !columns[3]) {
+                console.warn("Skipping invalid row:", columns);
+                return null; // Ignore incomplete rows
+            }
+
+            const [lat, lon, city, country] = columns;
+            return { lat: parseFloat(lat), lon: parseFloat(lon), city, country };
+        }).filter(Boolean); // Remove null values
+
+        console.log("Parsed City Data:", city_coordinates);
+        return city_coordinates;
+    } catch (error) {
+        console.error("Error loading city coordinates:", error);
+        return [];
+    }
+
+    // return parseCSV(csvText);
+    // const rows = csvText.split('\n').slice(1); // Skip header row
+    // const city_coordinates = rows.map(row => {
+    //     const columns = row.trim().split(',');
+    //     if (columns.length < 4) return null;
+    //     const [lat, lon, city, country] = columns.map(col => col.trim());
+    //     if (isNaN(parseFloat(lat)) || isNaN(parseFloat(lon)) || !city || !country) return null;
+    //     return { lat: parseFloat(lat), lon: parseFloat(lon), city, country };
+    // }).filter(Boolean);
+    // return city_coordinates;
+    //     } catch (error) {
+    //         console.error('Error loading city coordinates:', error);
+    //         return [];
+    //     }
+    // }
+
 async function populateDropdown() {
+    console.log("Running populateDropdown()...");
+
     const city_coordinates = await loadCity_Coordinates();
-    const dropdown = document.getElementById('city-dropdown');
+    console.log("Loaded Cities for Dropdown:", city_coordinates);
+
+    const dropdown = document.getElementById('citySelected'); // Ensure this ID matches the HTML
+    if (!dropdown) {
+        console.error('Dropdown element not found!');
+        return;
+    }
+
+    dropdown.innerHTML = '<option value="">Select a city</option>';
+
     city_coordinates.forEach(({ city }, index) => {
+        console.log(`Adding city: ${city}`); // Debug each city added
+
         const option = document.createElement('option');
-        option.value = index; // Use index to reference city later
+        option.value = index; // Reference city later
         option.textContent = city;
         dropdown.appendChild(option);
     });
-}
 
-// Handle form submission
-document.getElementById('weather-form').addEventListener('submit', async event => {
-    event.preventDefault();
-    const selectedIndex = document.getElementById('city-dropdown').value;
-    if (selectedIndex === '') return;
-
-    const city_coordinates = await loadCity_Coordinates();
-    const { lat, lon, city, country } = city_coordinates[selectedIndex];
-
-    // Fetch weather data from 7timer API
-    const weatherResponse = await fetch(
-        `${apiEndpoint}?lon=${lon}&lat=${lat}&product=civillight&output=json`
-    );
-    const weatherData = await weatherResponse.json();
-
-    // Display weather information
-    const weatherResult = document.getElementById('weather-result');
-    if (weatherResponse.ok) {
-        const forecast = weatherData.dataseries;
-        weatherResult.innerHTML = `<h2>7-Day Weather Forecast for ${city}</h2>`;
-        forecast.forEach(day => {
-            const date = new Date(day.date.toString().slice(0, 4), day.date.toString().slice(4, 6) - 1, day.date.toString().slice(6));
-            weatherResult.innerHTML += `
-                <div class="weather-day">
-                    <span>${date.toDateString()}</span>
-                    <span>${day.temp2m.min}°C / ${day.temp2m.max}°C</span>
-                    <span>${day.weather}</span>
-                </div>
-            `;
-        });
-    } else {
-        weatherResult.innerHTML = `<p>Error: Unable to fetch weather data.</p>`;
-    }
-});
-
-// Load and populate city_coordinates on page load
-populateDropdown();
+    console.log("Dropdown populated successfully!");
+    };
+};
